@@ -10,10 +10,11 @@ Install Arch-ISO on a usb, wipe the disk and reboot.
 
 Get your device' name: `lsblk`
 
-Wipe the disk:
-`blkdiscard -s -v /dev/device_name`
+Wipe the disk (-s option might not be available):
+`blkdiscard -s -v -f /dev/device_name`
 
-Reboot to be sure.
+Sometimes the bootmanager still register old boot path,
+so I reboot into ISO again to be sure.
 
 Run these commands:
 ```
@@ -217,20 +218,29 @@ fwupdmgr get-devices
 
 I consider these my "system" packages:
 ```
-pacman -S uwsm hyprland hyprlock hypridle hyprpaper hyprsunset mako \
-xdg-desktop-portal-hyprland xdg-desktop-portal-gtk nwg-displays \
-waybar rofi-wayland cliphist wl-clipboard grim slurp qt6ct nwg-look ttf-jetbrains-mono-nerd \
-ttf-montserrat papirus-icon-theme tmux zathura-pdf-mupdf imv mpv cups
+pacman -S uwsm greetd greetd-tuigreet hyprland hyprlock hypridle hyprpaper \
+hyprsunset mako xdg-desktop-portal-hyprland xdg-desktop-portal-gtk \
+nwg-displays waybar rofi-wayland cliphist wl-clipboard grim slurp qt6ct \
+nwg-look ttf-jetbrains-mono-nerd ttf-montserrat papirus-icon-theme tmux \
+zathura-pdf-mupdf imv mpv cups
 ```
 
 Yazi file manager:
 ```
-pacman -S file ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick yazi
+pacman -S file ffmpeg 7zip jq poppler fd ripgrep fzf \
+zoxideresvg imagemagick yazi
 ```
 
 Then, there are favourite apps I use: 
 ```
-pacman -S signal-desktop telegram-desktop thunderbird firefox gimp libreoffice-still obs-studio
+pacman -S signal-desktop telegram-desktop thunderbird \
+firefox gimp libreoffice-still obs-studio
+```
+
+These are required for my nvim config, but better to check again later
+with `checkhealth` command.
+```
+pacman -S unzip wget npm nodejs tree-sitter-cli
 ```
 
 
@@ -293,9 +303,7 @@ Configure greetd in */etc/greetd/config.toml*:
 command = "tuigreet -w 70 –-asterisks --remember --remember-session"
 ```
 
-reboot.
-
-When logging in for the first time choose the user
+Reboot. When logging in for the first time choose the user
 and the **uwsm-managed** session for **hyprland**.
 
 Enable hypridle: `systemctl --user enable --now hypridle.service`
