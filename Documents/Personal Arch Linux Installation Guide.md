@@ -222,7 +222,7 @@ pacman -S uwsm greetd greetd-tuigreet hyprland hyprlock hypridle hyprpaper \
 hyprsunset mako xdg-desktop-portal-hyprland xdg-desktop-portal-gtk \
 nwg-displays waybar rofi-wayland cliphist wl-clipboard grim slurp qt6ct \
 nwg-look ttf-jetbrains-mono-nerd ttf-montserrat papirus-icon-theme tmux \
-zathura-pdf-mupdf imv mpv cups
+zathura-pdf-mupdf imv mpv cups bluetui
 ```
 
 Yazi file manager:
@@ -268,10 +268,6 @@ systemctl enable nvidia-suspend.service
 systemctl enable nvidia-hibernate.service
 systemctl enable nvidia-resume.service
 ```
-
-Add `resume` hook after `encrypt` in 'mkinitcpio.conf' for hibernation
-to work. The hibernation on UEFI and btrfs should work out of the box,
-even if warnings are displayed on launch.
 
 Run `mkinitcpio -P`
 
