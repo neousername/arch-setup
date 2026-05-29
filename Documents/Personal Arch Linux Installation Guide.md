@@ -234,7 +234,7 @@ zoxideresvg imagemagick yazi
 Then, there are favourite apps I use: 
 ```
 pacman -S signal-desktop telegram-desktop thunderbird \
-firefox gimp libreoffice-still obs-studio
+firefox gimp libreoffice-still obs-studio discord steam
 ```
 
 Install dependencies for nvim plugings
@@ -251,15 +251,6 @@ Essentially all apps require specific configuration with specific environmental 
 Do not forget to make the sh files executables inside of *scripts* directory.
 
 keychain should be configured in bash_profile after generating ssh keys.
-
-Add these to *uwsm/env* file (create manually)
-in order for GDK and QT-Based apps to work as expected:
-```
-export GDK_BACKEND=wayland,x11,*
-export QT_QPA_PLATFORM=wayland;xcb
-export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-export QT_QPA_PLATFORMTHEME=qt6ct
-```
 
 
 ## Installing NVIDIA drivers
