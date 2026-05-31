@@ -66,7 +66,7 @@ Installing core packages:
 pacman -Syy
 pacstrap -K /mnt base base-devel linux linux-firmware btrfs-progs efibootmgr \
 util-linux intel-ucode cryptsetup limine sbctl sudo networkmanager firewalld reflector \
-avahi bluez bluez-utils acpi acpi_call acpid alsa-utils pipewire pipewire-alsa \
+avahi bluez bluez-utils bluetui acpi acpi_call acpid alsa-utils pipewire pipewire-alsa \
 pipewire-pulse pipewire-jack wireplumber pulsemixer sof-firmware bash-completion \
 git openssh keychain neovim alacritty terminus-font man 
 ```
@@ -222,7 +222,7 @@ pacman -S uwsm greetd greetd-tuigreet hyprland hyprlock hypridle hyprpaper \
 hyprsunset mako xdg-desktop-portal-hyprland xdg-desktop-portal-gtk \
 nwg-displays waybar rofi-wayland cliphist wl-clipboard grim slurp qt6ct \
 nwg-look ttf-jetbrains-mono-nerd ttf-montserrat papirus-icon-theme tmux \
-zathura-pdf-mupdf imv mpv cups bluetui
+zathura-pdf-mupdf imv mpv cups 
 ```
 
 Yazi file manager:
