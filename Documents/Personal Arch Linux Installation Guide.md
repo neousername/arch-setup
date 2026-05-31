@@ -231,6 +231,7 @@ pacman -S file ffmpeg 7zip jq poppler fd ripgrep fzf \
 zoxideresvg imagemagick yazi
 ```
 
+
 Then, there are favourite apps I use: 
 ```
 pacman -S signal-desktop telegram-desktop thunderbird \
@@ -248,7 +249,10 @@ I use uwsm-managed hyprland.
 I store and maintain my config files in a git repo. I pull it into my home directory.
 Essentially all apps require specific configuration with specific environmental variables.
 
-Do not forget to make the sh files executables inside of *scripts* directory.
+Do not forget to:
+make the sh files executables inside of *scripts* directory;
+make zathura default pdf viewer with: 
+`xdg-mime default org.pwmt.zathura.desktop application/pdf`
 
 keychain should be configured in bash_profile after generating ssh keys.
 
