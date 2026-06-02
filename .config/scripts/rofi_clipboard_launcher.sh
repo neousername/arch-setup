@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-selected=$(cliphist list | rofi -dmenu -p "Clipboard:" -theme "$HOME/.config/rofi/config.rasi")
+selected=$(cliphist list | cut -f 2- | rofi -dmenu -p "Clipboard:" -theme "$HOME/.config/rofi/config.rasi")
 [[ -z "$selected" ]] && exit 0
 
 tmp=$(mktemp)
