@@ -1,9 +1,8 @@
 # Personal Arch Linux Installation Guide
 
-NVIDIA with no hibernation/sleep; Intel CPU;
-BTRFS with encryption; snapper; hyprland;
-
-Install Arch-ISO on a usb, wipe the disk and reboot.
+NVIDIA with no hibernation; Intel CPU;
+BTRFS with encryption; secure boot; 
+snapper; hyprland; my own dotfiles;
 
 
 # First Steps
@@ -22,8 +21,9 @@ loadkeys de-latin1
 setfont ter-132b
 ```
 
-Connect to the wifi with **iwctl**.
 This should return 64: `cat /sys/firmware/efi/fw_platform_size`
+
+Connect to the wifi with **iwctl**
 
 Partition, encrypt and format:
 ```
@@ -124,8 +124,8 @@ efibootmgr --create --disk /dev/nvme0n1 --part 1 \
          --unicode
 ```
 
-Configure limine in */boot/EFI/limine/limine.conf*.
-Get your UUID: `cryptsetup luksUUID /dev/nvme0n1p2`
+Get your UUID: `cryptsetup luksUUID /dev/nvme0n1p2`.
+Configure limine in */boot/EFI/limine/limine.conf*:
 ```
 timeout: 0
  
@@ -138,7 +138,7 @@ timeout: 0
         module_path: boot():/initramfs-linux.img
 ```
 
-Adjust modprobe.blacklist argument based on the CPU. This makes CPU faster.
+Adjust modprobe.blacklist argument based on the CPU. This disables *watchdog* service
 
 
 ## Finalizing arch installation
@@ -239,30 +239,21 @@ opencode ollama ollama-cuda
 ```
 
 
-Install dependencies for nvim plugings
-after running `checkhealth` command.
-
 
 ## Configuring apps
 
-I use uwsm-managed hyprland.
+I use uwsm-managed hyprland
 
 I store and maintain my config files in a git repo.
-I pull it into my home directory.
+I pull it into my home directory
 
 Essentially all apps require specific configuration
-with specific environmental variables.
-
-Do not forget to:
-- make the sh files executables inside of *scripts* directory;
-- make zathura default pdf viewer with: 
-  `xdg-mime default org.pwmt.zathura.desktop application/pdf`
-- configure keychain
+with specific environmental variables
 
 
 ## Installing NVIDIA drivers
 
-Uncomment multilib options in */etc/pacman.conf*.
+Uncomment multilib options in */etc/pacman.conf*
 
 Run this:
 ```
@@ -280,7 +271,7 @@ export __GLX_VENDOR_LIBRARY_NAME=nvidia
 Sleep should work outside of the box. Hibernation on NVIDIA on Wayland 
 is broken in my experience. If you do not use hibernation,
 add the following settings in the `/etc/systemd/sleep.conf`, so that 
-the pc stays in sleep and does not power after a while:
+the pc stays in sleep and does not power off after a while:
 ```
 [Sleep]
 AllowHibernation=no
@@ -300,53 +291,60 @@ command = "tuigreet -w 70 –-asterisks --remember --remember-session"
 ```
 
 Reboot. When logging in for the first time choose the user
-and the **uwsm-managed** session for **hyprland**.
+and the **uwsm-managed** session for **hyprland**
 
 
 
 ## Finalizing my setup
 
 Go to *.config/hypr/hypr.conf* and add a binding for 
-alacritty and firefox.
+alacritty and firefox
 
-Generate ssh key and add it to github.
-Use `ssh-keygen -t ed25519 -C "your_email@example.com"`.
-Add the public key to the GitHub.
+Generate ssh key and add it to github
+Use `ssh-keygen -t ed25519 -C "your_email@example.com"`
+Add the public key to the GitHub
 
-Fetch my config:
+Fork my repository on GitHub
+
+Fetch the forked repository into home directory:
 ```
 git init
-git remote add origin git@github.com:USERNAME/REPO-NAME.git
+git remote add origin git@github.com:USERNAME/REPONAME.git
 git fetch
-git checkout -f main
+git checkout -f master
 ```
 
-Enable hypridle: `systemctl enable hypridle.service`
-Enable ollama: `systemctl ollama.service`
+- Enable hypridle: `systemctl enable hypridle.service`
+- Enable ollama: `systemctl ollama.service`
+- Make .sh-files executables inside of *scripts* directory
+- make zathura default pdf viewer: `xdg-mime default org.pwmt.zathura.desktop application/pdf`
+- Install dependencies for nvim plugings after running `checkhealth` command
 
 
 # Secure boot
 
-The following definitely works on ASUS motherboards.
+The following definitely works on ASUS motherboards
 
-Enter UEFI setup menu: `systemctl --firmware-setup reboot`.
+Enter UEFI setup menu: `systemctl --firmware-setup reboot`
 
 Do not change OS Type to Custom from Windows mode. Instead, open the 
-sub menu: *Key Managment*. Use `Clear Secure Boot Keys` to enter Setup Mode.
+sub menu: *Key Managment*. Use `Clear Secure Boot Keys` to enter Setup Mode
 
 Secure boot should be disabled now. Exit the firmware with save and reset option,
-even if it says no changes have been performed. 
+even if it says no changes have been performed
 
 Confirm that setup mode is enabled: `sudo sbctl status`
 Create custom secure boot keys: `sudo sbctl create-keys`
 Enroll custom secure boot keys: `sudo sbctl enroll-keys --microsoft`
 
-Sign bootloader and kernel with sbctl before rebooting. the -s flag
-saves the path so sbctl re-signs it automatically on updates via
-its pacman hook:
+Sign bootloader and kernel with sbctl.
+The -s flag saves the path so sbctl re-signs it
+automatically on updates via its pacman hook:
 ```
 sudo sbctl sign -s /boot/EFI/limine/BOOTX64.EFI
 sudo sbctl sign -s /boot/vmlinuz-linux
 ```
+
+Reboot
 
 Confirm that setup mode is disabled now: `sudo sbctl status`
