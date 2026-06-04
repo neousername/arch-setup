@@ -15,7 +15,11 @@
 
 !.config/
 !.config/nvim/
-!.config/nvim/**
+!.config/nvim/init.lua
+!.config/nvim/lsp/
+!.config/nvim/lsp/**
+!.config/nvim/lua/
+!.config/nvim/lua/**
 
 !.config/hypr/
 !.config/hypr/hyprland.lua
