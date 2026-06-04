@@ -5,8 +5,8 @@ local col_shadow         = 0xee0d0d0f
 
 hl.config({
     general = {
-        gaps_in  = 0,
-        gaps_out = 0,
+        gaps_in  = 4,
+        gaps_out = 4,
 
         border_size = 1,
 

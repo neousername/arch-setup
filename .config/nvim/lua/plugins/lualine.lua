@@ -7,7 +7,7 @@ return {
     end
     require("lualine").setup {
       options = {
-        theme = 'tokyonight-storm',
+        theme = 'carbonfox',
         global_status = true,
       },
       sections = {

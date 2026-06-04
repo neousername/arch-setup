@@ -13,6 +13,7 @@
 !.bashrc
 !.bash_profile
 
+
 !.config/
 !.config/nvim/
 !.config/nvim/init.lua
@@ -20,6 +21,9 @@
 !.config/nvim/lsp/**
 !.config/nvim/lua/
 !.config/nvim/lua/**
+
+!.config/opencode/
+!.config/opencode/opencode.jsonc
 
 !.config/hypr/
 !.config/hypr/hyprland.lua

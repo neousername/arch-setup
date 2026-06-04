@@ -14,4 +14,10 @@ function y() {
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+
+# My aliases
+alias aiserve="OLLAMA_CONTEXT_LENGTH=65536 ollama serve"
+alias ocserve="opencode serve --port"
+alias ocrun="opencode attach http://localhost:4096"
+
 PS1='[\W]\$ '

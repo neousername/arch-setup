@@ -228,13 +228,6 @@ pacman -Syu linux-headers nvidia-dkms nvidia-utils \
 lib32-nvidia-utils egl-wayland 
 ```
 
-After launching Hyprland for the first time, 
-add these environment variables to *.config/uwsm/env*:
-```
-export LIBVA_DRIVER_NAME=nvidia
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-```
-
 Sleep should work outside of the box. Hibernation on NVIDIA on Wayland 
 is broken in my experience. If you do not use hibernation,
 add the following settings in the `/etc/systemd/sleep.conf`, so that 
@@ -253,7 +246,7 @@ I consider these my "system" packages:
 ```
 pacman -S uwsm greetd greetd-tuigreet hyprland hyprlock hypridle hyprpaper \
 hyprsunset mako xdg-desktop-portal-hyprland xdg-desktop-portal-gtk \
-nwg-displays waybar rofi-wayland cliphist wl-clipboard grim slurp qt6ct \
+nwg-displays waybar rofi-wayland btop cliphist wl-clipboard grim slurp qt6ct \
 nwg-look ttf-jetbrains-mono-nerd ttf-montserrat papirus-icon-theme tmux \
 zathura-pdf-mupdf imv mpv cups 
 ```
@@ -325,10 +318,11 @@ git checkout -f master
 ```
 
 - Enable hypridle: `systemctl --user enable hypridle.service`
-- Enable ollama: `systemctl ollama.service`
 - Make .sh-files executables inside of *scripts* directory
 - make zathura default pdf viewer: `xdg-mime default org.pwmt.zathura.desktop application/pdf`
 - Install dependencies for nvim plugings after running `checkhealth` command
+- Clean up garbage files like steampath links in *home* and user-dirs configuration in .config
+- run opencode server and ollama server when vibe-coding (guarantees virginity till 30)
 
 
 # Secure boot
