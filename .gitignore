@@ -19,6 +19,7 @@
 !.config/nvim/lua/
 !.config/nvim/lua/**
 !.config/nvim/init.lua
+!.config/nvim/after/
 !.config/nvim/after/lsp/
 !.config/nvim/after/lsp/**
 
