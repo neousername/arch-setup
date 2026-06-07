@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       desc = 'Go to declaration',
     })
 
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, {
+    vim.keymap.set('n', 'K', require("pretty_hover").hover, {
       buffer = ev.buf,
       desc = 'Hover documentation',
     })

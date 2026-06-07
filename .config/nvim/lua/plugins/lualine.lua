@@ -10,7 +10,7 @@ return {
 
     require("lualine").setup {
       options = {
-	theme = 'carbonfox',
+	theme = 'auto',
       },
       sections = {
 	lualine_a = { "mode" },
