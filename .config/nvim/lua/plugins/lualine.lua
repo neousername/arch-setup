@@ -1,26 +1,24 @@
 return {
-  "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+	"nvim-lualine/lualine.nvim",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 
-  config = function()
+	config = function()
+		local function cwd()
+			return vim.fn.expand("%:p:h:t")
+		end
 
-    local function cwd()
-      return vim.fn.expand("%:p:h:t")
-    end
-
-    require("lualine").setup {
-      options = {
-	theme = 'auto',
-      },
-      sections = {
-	lualine_a = { "mode" },
-	lualine_b = { "branch" },
-	lualine_c = { cwd, "filename" },
-	lualine_x = {},
-	lualine_y = { "diagnostics" },
-	lualine_z = { "location", "progress" }
-      }
-    }
-
-  end
+		require("lualine").setup {
+			options = {
+				theme = "auto",
+			},
+			sections = {
+				lualine_a = { "mode" },
+				lualine_b = { "branch" },
+				lualine_c = { cwd, "filename" },
+				lualine_x = {},
+				lualine_y = { "diagnostics" },
+				lualine_z = { "location", "progress" }
+			}
+		}
+	end
 }

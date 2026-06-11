@@ -1,40 +1,42 @@
 return {
-  "nickjvandyke/opencode.nvim",
-  version = "*", -- Latest stable release
-  dependencies = {
-    {
-      -- `snacks.nvim` integration is recommended, but optional
-      ---@module "snacks" <- Loads `snacks.nvim` types for configuration intellisense
-      "folke/snacks.nvim",
-      optional = true,
-      opts = {
-        input = {}, -- Enhances `ask()`
-        picker = { -- Enhances `select()`
-          actions = {
-            opencode_send = function(...) return require("opencode").snacks_picker_send(...) end,
-          },
-          win = {
-            input = {
-              keys = {
-                ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
-              },
-            },
-          },
-        },
-      },
-    },
-  },
-  config = function()
-    ---@type opencode.Opts
-    vim.g.opencode_opts = {
-      -- Your configuration, if any; goto definition on the type or field for details
-    }
+	"nickjvandyke/opencode.nvim",
+	version = "*", -- Latest stable release
+	dependencies = {
+		{
+			-- `snacks.nvim` integration is recommended, but optional
+			---@module "snacks" <- Loads `snacks.nvim` types for configuration intellisense
+			"folke/snacks.nvim",
+			optional = true,
+			opts = {
+				input = {}, -- Enhances `ask()`
+				picker = {  -- Enhances `select()`
+					actions = {
+						opencode_send = function(...) return require("opencode").snacks_picker_send(...) end,
+					},
+					win = {
+						input = {
+							keys = {
+								["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
+							},
+						},
+					},
+				},
+			},
+		},
+	},
+	config = function()
+		---@type opencode.Opts
+		vim.g.opencode_opts = {
+			-- Your configuration, if any; goto definition on the type or field for details
+		}
 
-    vim.o.autoread = true -- Required for `vim.g.opencode_opts.events.reload`
+		vim.o.autoread = true -- Required for `vim.g.opencode_opts.events.reload`
 
-    -- I use opencode in a separate Tmux window. These are the only keybidnigs I need.
-    vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").ask("@this: ") end, { desc = "Ask opencode…" })
-    vim.keymap.set({ "n", "x" }, "go",  function() return require("opencode").operator("@this ") end,        { desc = "Add range to opencode", expr = true })
-    vim.keymap.set("n",          "goo", function() return require("opencode").operator("@this ") .. "_" end, { desc = "Add line to opencode", expr = true })
-  end,
+		-- I use opencode in a separate Tmux window. These are the only keybidnigs I need.
+		vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").ask("@this: ") end, { desc = "Ask opencode…" })
+		vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this ") end,
+			{ desc = "Add range to opencode", expr = true })
+		vim.keymap.set("n", "goo", function() return require("opencode").operator("@this ") .. "_" end,
+			{ desc = "Add line to opencode", expr = true })
+	end,
 }
